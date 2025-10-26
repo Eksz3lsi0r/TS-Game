@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: r3f-game-deployment
+  labels:
+    app: r3f-game
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: r3f-game
+  template:
+    metadata:
+      labels:
+        app: r3f-game
+    spec:
+      containers:
+        - name: r3f-game
+          image: r3f-game:latest
+          ports:
+            - containerPort: 3000
+          env:
+            - name: NODE_ENV
+              valueFrom:
+                configMapKeyRef:
+                  name: r3f-game-config
+                  key: NODE_ENV
+            - name: PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: r3f-game-config
+                  key: PORT
+            - name: HOSTNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: r3f-game-config
+                  key: HOSTNAME
+            - name: GAME_TITLE
+              valueFrom:
+                configMapKeyRef:
+                  name: r3f-game-config
+                  key: GAME_TITLE
+            - name: MAX_PLAYERS
+              valueFrom:
+                configMapKeyRef:
+                  name: r3f-game-config
+                  key: MAX_PLAYERS
+            - name: NEXT_TELEMETRY_DISABLED
+              valueFrom:
+                configMapKeyRef:
+                  name: r3f-game-config
+                  key: NEXT_TELEMETRY_DISABLED
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          # Health Checks für bessere Container-Überwachung
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+            timeoutSeconds: 3
+            failureThreshold: 3
+          # Graceful shutdown
+          lifecycle:
+            preStop:
+              exec:
+                command: ["/bin/sh", "-c", "sleep 15"]

@@ -1,5 +1,4 @@
 {
-  // Editor Einstellungen
   "editor.formatOnSave": true,
   "editor.formatOnPaste": true,
   "editor.codeActionsOnSave": {
@@ -15,7 +14,6 @@
   "editor.guides.bracketPairs": true,
   "editor.inlineSuggest.enabled": true,
 
-  // TypeScript Einstellungen
   "typescript.preferences.importModuleSpecifier": "relative",
   "typescript.suggest.autoImports": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
@@ -25,12 +23,10 @@
   "typescript.inlayHints.variableTypes.enabled": true,
   "typescript.inlayHints.functionLikeReturnTypes.enabled": true,
 
-  // JavaScript Einstellungen
   "javascript.preferences.importModuleSpecifier": "relative",
   "javascript.suggest.autoImports": true,
   "javascript.updateImportsOnFileMove.enabled": "always",
 
-  // ESLint Einstellungen
   "eslint.enable": true,
   "eslint.format.enable": true,
   "eslint.validate": [
@@ -40,14 +36,12 @@
     "typescriptreact"
   ],
 
-  // Prettier Einstellungen
   "prettier.semi": true,
   "prettier.singleQuote": true,
   "prettier.trailingComma": "es5",
   "prettier.tabWidth": 2,
   "prettier.useTabs": false,
 
-  // Next.js spezifische Einstellungen
   "files.associations": {
     "*.mdx": "markdown"
   },
@@ -56,7 +50,6 @@
     "typescript": "typescriptreact"
   },
 
-  // React Three Fiber / Three.js spezifische Einstellungen
   "files.exclude": {
     "**/node_modules": true,
     "**/.next": true,
@@ -71,39 +64,31 @@
     "**/build": true
   },
 
-  // Auto-Save Einstellungen
   "files.autoSave": "onFocusChange",
   "files.hotExit": "onExitAndWindowClose",
 
-  // Terminal Einstellungen
   "terminal.integrated.defaultProfile.osx": "zsh",
   "terminal.integrated.fontSize": 14,
 
-  // Git Einstellungen
   "git.autofetch": true,
   "git.confirmSync": false,
   "git.enableSmartCommit": true,
 
-  // Breadcrumbs
   "breadcrumbs.enabled": true,
   "breadcrumbs.filePath": "on",
   "breadcrumbs.symbolPath": "on",
 
-  // Explorer Einstellungen
   "explorer.confirmDelete": false,
   "explorer.confirmDragAndDrop": false,
   "explorer.compactFolders": false,
 
-  // Workbench Einstellungen
   "workbench.editor.enablePreview": false,
   "workbench.editor.closeOnFileDelete": true,
   "workbench.startupEditor": "newUntitledFile",
 
-  // Debugging Einstellungen
   "debug.console.fontSize": 14,
   "debug.inlineValues": "auto",
 
-  // Specific für 3D Development
   "files.watcherExclude": {
     "**/.git/objects/**": true,
     "**/.git/subtree-cache/**": true,
@@ -113,15 +98,12 @@
     "**/public/textures/**": true
   },
 
-  // Performance Optimierungen für große 3D Assets
   "search.smartCase": true,
   "search.followSymlinks": false,
 
-  // Language Server Einstellungen
   "typescript.preferences.disableSuggestions": false,
   "typescript.suggest.completeFunctionCalls": true,
 
-  // Tailwind CSS Einstellungen (falls verwendet)
   "tailwindCSS.includeLanguages": {
     "typescript": "javascript",
     "typescriptreact": "javascript"
@@ -131,12 +113,10 @@
     ["cx\\(([^)]*)\\)", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
   ],
 
-  // CSS Einstellungen
   "css.validate": true,
   "less.validate": true,
   "scss.validate": true,
 
-  // JSON Einstellungen
   "json.format.enable": true,
   "json.schemas": [
     {

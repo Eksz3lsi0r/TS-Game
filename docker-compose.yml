@@ -1,0 +1,73 @@
+# Docker Compose für lokale Entwicklung
+version: "3.8"
+
+services:
+  r3f-game:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - HOSTNAME=0.0.0.0
+      - GAME_TITLE=R3F Mario Game (Development)
+      - MAX_PLAYERS=4
+      - NEXT_TELEMETRY_DISABLED=1
+    volumes:
+      # Für Hot-Reload in Development
+      - .:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - r3f-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # MCP Kubernetes Server für lokale Tests
+  mcp-kubernetes:
+    image: mcp/kubernetes:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - CLUSTER_NAME=local-r3f-cluster
+      - LOG_LEVEL=debug
+    volumes:
+      # Kubernetes config für lokalen Zugriff
+      - ~/.kube:/home/mcp/.kube:ro
+    networks:
+      - r3f-network
+    restart: unless-stopped
+    depends_on:
+      - r3f-game
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+
+  # Redis für Session-Management (optional)
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - r3f-network
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis-data:/data
+
+networks:
+  r3f-network:
+    driver: bridge
+
+volumes:
+  redis-data:
+    driver: local

@@ -1,0 +1,36 @@
+# ConfigMap für R3F Game Konfiguration
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: r3f-game-config
+  labels:
+    app: r3f-game
+data:
+  # Next.js Konfiguration
+  NODE_ENV: "production"
+  PORT: "3000"
+  HOSTNAME: "0.0.0.0"
+
+  # Game-spezifische Konfiguration
+  GAME_TITLE: "R3F Mario Game"
+  MAX_PLAYERS: "4"
+  GAME_MODE: "multiplayer"
+
+  # Performance-Einstellungen
+  NEXT_TELEMETRY_DISABLED: "1"
+
+  # Logging
+  LOG_LEVEL: "info"
+---
+# Secret für sensible Daten (Beispiel)
+apiVersion: v1
+kind: Secret
+metadata:
+  name: r3f-game-secrets
+  labels:
+    app: r3f-game
+type: Opaque
+data:
+  # Base64 kodierte Werte
+  api-key: "" # Hier würden echte API-Schlüssel stehen
+  database-url: "" # Beispiel für Datenbank-URL
