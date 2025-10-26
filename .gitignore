@@ -2,3 +2,4 @@ package-lock.json
 tsconfig.tsbuild-info.json
 /dockerdesktop
 node_modules
+.next
