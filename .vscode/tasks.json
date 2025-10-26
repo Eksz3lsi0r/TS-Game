@@ -1,0 +1,42 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start R3F Game - Development Server",
+      "type": "shell",
+      "command": "npm run dev",
+      "isBackground": true,
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "label": "Build R3F Game - Production",
+      "type": "shell",
+      "command": "npm run build",
+      "problemMatcher": ["$tsc"],
+      "group": "build"
+    },
+    {
+      "label": "Start R3F Game - Kubernetes",
+      "type": "shell",
+      "command": "kubectl get pods,services && kubectl port-forward service/r3f-game-example-service 3000:80",
+      "isBackground": true,
+      "problemMatcher": [],
+      "group": "test"
+    },
+    {
+      "label": "Deploy R3F Game to Kubernetes",
+      "type": "shell",
+      "command": "./deploy.sh",
+      "problemMatcher": [],
+      "group": "build"
+    },
+    {
+      "type": "npm",
+      "script": "lint",
+      "problemMatcher": ["$eslint-compact"],
+      "label": "npm: lint",
+      "detail": "next lint"
+    }
+  ]
+}
